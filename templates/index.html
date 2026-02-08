@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arte Viruses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #f0f0f0;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(120, 119, 198, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 119, 198, 0.1) 0%, transparent 20%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-top: 20px;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: #6c63ff;
+            animation: pulse 2s infinite;
+        }
+        
+        .logo h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #6c63ff, #ff6b9d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(108, 99, 255, 0.3);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .main-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .main-title h1 {
+            font-size: 2.5rem;
+            color: #fff;
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .main-title h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #6c63ff, #ff6b9d);
+            border-radius: 2px;
+        }
+        
+        .virus-card {
+            background: rgba(30, 30, 46, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .virus-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.2);
+            border-color: rgba(108, 99, 255, 0.4);
+        }
+        
+        .virus-card h2 {
+            color: #6c63ff;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .virus-card h2 i {
+            font-size: 1.5rem;
+        }
+        
+        .virus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .virus-item {
+            background: rgba(40, 40, 60, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .virus-item:hover {
+            background: rgba(50, 50, 80, 0.9);
+            transform: translateY(-5px);
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+        
+        .virus-name {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .virus-name i {
+            color: #ff6b9d;
+        }
+        
+        .virus-description {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .virus-link {
+            display: inline-block;
+            background: linear-gradient(90deg, #6c63ff, #8a84ff);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.2);
+        }
+        
+        .virus-link:hover {
+            background: linear-gradient(90deg, #5a52e0, #6c63ff);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+        }
+        
+        .virus-link i {
+            margin-left: 8px;
+        }
+        
+        .warning {
+            background: rgba(255, 107, 157, 0.1);
+            border-left: 4px solid #ff6b9d;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .warning i {
+            color: #ff6b9d;
+            font-size: 1.5rem;
+        }
+        
+        .warning p {
+            color: #ffb8d0;
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .pulse-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #6c63ff;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.6; transform: scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2.2rem;
+            }
+            
+            .virus-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-title h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-biohazard logo-icon"></i>
+                <h1>Arte Viruses</h1>
+            </div>
+            <p class="tagline">Вирусы</p>
+        </header>
+        
+        <main>
+            <div class="main-title">
+                <h1>Последний вирус</h1>
+            </div>
+            
+            <div class="virus-card">
+                <h2><i class="fas fa-gem"></i> ArteCoin Miner</h2>
+                
+                <div class="warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p><strong>Внимание:</strong> Все представленные здесь вирусы могут нанести вашему компьютеру вред! Запускайте их только на виртуальной машине!</p>
+                </div>
+                
+                <a href="/virus2" class="virus-link">Скачать <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="main-title">
+                <h1>Коллекция вирусов</h1>
+            </div>
+            
+            <div class="virus-grid">
+                <div class="virus-item">
+                    <div class="virus-name">
+                        <i class="fas fa-gem"></i>
+                        <span>ArteCoin Miner</span>
+                    </div>
+                    <a href="/virus2" class="virus-link">Скачать</a>
+                </div>
+                
+                <div class="virus-item">
+                    <div class="virus-name">
+                        <i class="fas fa-windows"></i>
+                        <span>Windows 12 Setup</span>
+                    </div>
+                    <a href="/virus1" class="virus-link">Скачать</a>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p><span class="pulse-dot"></span> Arte Viruses Project | Вирусы | 2023</p>
+            <p style="margin-top: 10px;">Все работы являются настоящими вирусами.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Добавляем интерактивность для элементов
+        document.addEventListener('DOMContentLoaded', function() {
+            const virusItems = document.querySelectorAll('.virus-item');
+            
+            virusItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Анимация для кнопок
+            const buttons = document.querySelectorAll('.virus-link');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Если ссылка ведет на несуществующую страницу, показываем сообщение
+                    if (this.getAttribute('href') === '/virus1' || 
+                        this.getAttribute('href') === '/virus2' ||
+                        this.getAttribute('href') === '/virus3') {
+                        e.preventDefault();
+                        window.location = this.getAttribute('href')
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

